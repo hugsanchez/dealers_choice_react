@@ -9,18 +9,30 @@ app.use('/styles', express.static(path.join(__dirname, 'styles')));
 app.get('/', (req,res,next) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/produce', async(req,res,next) => {
+    try{
     const produce = await Produce.findAll();
     res.send(produce);
+    }catch(ex){
+        next(ex)
+    }
 });
 
 app.get('/api/meat', async(req,res,next) => {
+    try{
     const meat = await Meat.findAll();
     res.send(meat);
+    }catch(ex){
+        next(ex)
+    }
 });
 
 app.get('/api/dairy', async(req,res,next) => {
+    try{
     const dairy = await Dairy.findAll();
     res.send(dairy);
+    }catch(ex){
+        next(ex)
+    }
 });
 
 const init = async() => {

@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-const Nav = () => {
+const Nav = ({count}) => {
     return(
         <nav>
-            <a href='#'>List</a>
+            <a href='#'>List({count})</a>
             <a href='#produce'>Produce</a>
             <a href='#meat'>Meats</a>
             <a href='#dairy'>Dairy</a>
         </nav>
+        
     )
 }
 
-export default Nav;
+const mapStateToProps = ({list}) => {
+    return{
+        count: list.length
+    };
+};
+
+export default connect(mapStateToProps)(Nav);

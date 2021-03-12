@@ -7,15 +7,18 @@ class Meat extends Model {}
 class Dairy extends Model {}
 
 Produce.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    product: DataTypes.STRING
 },{sequelize:db, modelName: 'produce'});
 
 Meat.init({
     name: DataTypes.STRING,
+    product: DataTypes.STRING
 },{sequelize:db, modelName:'meat'});
 
 Dairy.init({
     name: DataTypes.STRING,
+    product: DataTypes.STRING
 },{sequelize:db, modelName:'dairy'}); 
 
 const syncAndSeed = async() => {
@@ -25,6 +28,7 @@ const syncAndSeed = async() => {
         const [carrot, lettuce, onion, broccoli, potato, bellPeppers, celery] = ['Carrot', 'Lettuce', 'Onion', 'Broccoli', 'Potato', 'Bell Peppers', 'Celery'].map(veggie =>
             new Produce({
                 name: veggie,
+                product: 'produce'
             }));
 
         await Promise.all([carrot.save(), lettuce.save(), onion.save(), broccoli.save(), potato.save(), bellPeppers.save(), celery.save()]);
@@ -32,12 +36,14 @@ const syncAndSeed = async() => {
         const [chicken, beef, fish, lamb, lobster] = ['Chicken', 'Beef', 'Fish', 'Lamb', 'Lobster'].map(meat =>
             new Meat({
                 name: meat,
+                product: 'meat'
             }));
         await Promise.all([chicken.save(), beef.save(), fish.save(), lamb.save(), lobster.save()]);
 
         const [milk, eggs, cheese] = ['Milk', 'Eggs', 'Cheese'].map(dairy =>
             new Dairy({
                 name: dairy,
+                product: 'dairy'
             }));
         await Promise.all([milk.save(), eggs.save(), cheese.save()]);
     } catch(ex){

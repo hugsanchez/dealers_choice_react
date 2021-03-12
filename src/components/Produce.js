@@ -1,36 +1,34 @@
-import axios from 'axios';
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import store, {addItem} from '../store';
 
-class Produce extends Component{
-    constructor(){
-        super();
-        this.state ={
-            produce:[]
+const Produce = ({produce, add}) => {
+    return (
+        <div id='product'>
+        {
+            produce.map((currPro, proIdx) =>{
+               return( <div key={proIdx} className='produce'>
+                   {currPro.name}
+                   <button onClick ={ () => add(currPro.name)}>ADD</button>
+                   </div>)
+            })
         }
-    }
-    async componentDidMount(){
-        try{
-            const produce = (await axios.get('/api/produce')).data;
-            this.setState({produce})
-        } catch(ex){
-            console.log(ex);
-        }
-    }
-    render(){
-        const{produce} = this.state;
-        return(
-            <div id='product'>
-                {
-                    produce.map((currPro, proIdx) =>{
-                       return( <div key={proIdx}>
-                           {currPro.name}
-                           <button>ADD</button>
-                           </div>)
-                    })
-                }
-            </div>
-        )
-    }
-}
+    </div>
+    );
+}; 
 
-export default Produce;
+const mapStateToProps = ({produce}) => {
+    return{
+        produce
+    };  
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+            add: (name) => {
+            dispatch(addItem(name))
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Produce);
