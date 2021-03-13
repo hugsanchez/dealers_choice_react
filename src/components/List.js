@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import store, {deleteItem} from '../store';
 
 
-const List = ({list}) => {
+const List = ({list, removeThing}) => {
     return (
         <div id='list'>
         <h1>Grocery List</h1>
@@ -10,7 +11,8 @@ const List = ({list}) => {
         {
             list.map((item, itemIdx) =>{
                 return (
-                    <li key={itemIdx}>{item.name}</li>
+                    <li key={itemIdx}>{item.name}<button onClick = {() => removeThing(itemIdx)}>X</button></li>
+                    
                 )
             })
         }
@@ -25,4 +27,13 @@ const mapStateToProps = ({list}) => {
     }
 };
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeThing: (itemIdx) => {
+            console.log(itemIdx)
+            dispatch(deleteItem(itemIdx))
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

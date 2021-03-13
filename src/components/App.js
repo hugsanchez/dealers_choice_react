@@ -24,7 +24,6 @@ class App extends Component{
     }
     render(){
         const {view} = this.state;
-        const {list} = this.props;
 
         return(
             <div>

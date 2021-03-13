@@ -43,10 +43,14 @@ nav > a{
 ul> *{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     font-size: 2rem;
     background-color: lightblue;
     height: 3rem;
     width: 30rem;
     border: solid black 2px;
+}
+button{
+    height: 3rem;
+    width: 3rem;
 }
