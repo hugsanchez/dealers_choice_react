@@ -18,11 +18,11 @@ const Dairy = ({dairy, add}) => {
     );
 }; 
 
-const mapStateToProps = ({dairy}) => {
-    return{
-        dairy
-    };  
-};
+// const mapStateToProps = ({dairy}) => {
+//     return{
+//         dairy
+//     };  
+// };
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dairy);
+export default connect(state => state, mapDispatchToProps)(Dairy);
